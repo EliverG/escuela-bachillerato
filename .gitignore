@@ -1,0 +1,48 @@
+# === CakePHP ===
+/vendor/
+!/vendor/.gitkeep
+
+/config/.env
+/config/.env.*
+/config/app_local.php
+
+/tmp/*
+!/tmp/.gitkeep
+
+/logs/*
+!/logs/.gitkeep
+
+# === Composer ===
+composer.lock
+/composer.phar
+
+# === IDE / Sistema ===
+*.bak
+*.tmp
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+nbproject/
+
+# === Tests y coverage ===
+/coverage/*
+/phpunit.xml
+/phpunit.xml.dist
+
+# === Cache ===
+/cache/*
+!/cache/.gitkeep
+
+# === Node / Frontend (si usas npm o yarn) ===
+/node_modules/
+/package-lock.json
+/yarn.lock
+
+# === Build / Deploy ===
+/build/
+/dist/
+/webroot/js/build/
+/webroot/css/build/
