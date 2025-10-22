@@ -3,23 +3,62 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Cake\Http\Exception\NotFoundException;
-
 class AlumnosController extends AppController
 {
-    public function index()
-    {
-      // Consulta con relaciones
+    // public function index()
+    // {
+    //   // Consulta con relaciones
+    // $query = $this->Alumnos->find('all', [
+    //     'contain' => ['Carreras'],
+    //     'order' => ['Alumnos.id_alumno' => 'DESC']
+    // ]);
+
+    // // Paginación moderna (CakePHP 5)
+    // $alumnos = $this->paginate($query);
+
+    // $this->set(compact('alumnos'));
+    // }
+
+   public function index()
+{
+    $q = trim((string)$this->request->getQuery('q', ''));
+    $carreraId = $this->request->getQuery('carrera_id');
+
     $query = $this->Alumnos->find('all', [
         'contain' => ['Carreras'],
-        'order' => ['Alumnos.id_alumno' => 'DESC']
     ]);
 
-    // Paginación moderna (CakePHP 5)
-    $alumnos = $this->paginate($query);
-
-    $this->set(compact('alumnos'));
+    // Filtro por nombre/apellido
+    if ($q !== '') {
+        $like = '%' . $q . '%';
+        $query->where([
+            'OR' => [
+                'Alumnos.nombres LIKE' => $like,
+                'Alumnos.apellidos LIKE' => $like,
+            ]
+        ]);
     }
+
+    // Filtro por carrera
+    if (!empty($carreraId)) {
+        $query->where(['Alumnos.id_carrera' => $carreraId]);
+    }
+
+    $query->order(['Alumnos.id_alumno' => 'DESC']);
+
+    // Paginación optimizada
+    $alumnos = $this->paginate($query, ['limit' => 10]);
+
+    // Listado de carreras para el filtro
+    $carreras = $this->Alumnos->Carreras->find('list', [
+        'keyField' => 'id_carrera',
+        'valueField' => 'nombre'
+    ])->order(['nombre' => 'ASC'])->all();
+
+    $this->set(compact('alumnos', 'carreras', 'q', 'carreraId'));
+}
+
+
 
     public function view($id = null)
     {

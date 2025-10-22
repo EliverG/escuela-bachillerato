@@ -43,6 +43,13 @@ return static function (RouteBuilder $builder): void {
     $builder->connect('/secciones', ['controller' => 'Secciones', 'action' => 'index']);
     $builder->connect('/cursos-aprobados', ['controller' => 'CursosAprobados', 'action' => 'index']);
 
+    $builder->connect('/reporteria', ['controller' => 'Reporteria', 'action' => 'index']);
+$builder->connect('/reporteria/pdf-alumnos', ['controller' => 'Reporteria', 'action' => 'pdfAlumnosPorCarrera']);
+$builder->connect('/reporteria/pdf-notas', ['controller' => 'Reporteria', 'action' => 'pdfNotasPorCarreraCursoSeccion']);
+
+
+
+
 
     // Fallbacks
     $builder->fallbacks();

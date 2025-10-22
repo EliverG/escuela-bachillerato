@@ -34,6 +34,8 @@ class CursosAprobadosTable extends Table
         $this->belongsTo('Secciones', [
             'foreignKey' => 'id_seccion',
             'joinType' => 'INNER',
+            'propertyName' => 'seccion',
+
         ]);
     }
 

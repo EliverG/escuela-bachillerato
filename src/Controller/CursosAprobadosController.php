@@ -39,6 +39,28 @@ class CursosAprobadosController extends AppController
 
         $this->set(compact('cursoAprobado', 'alumnos', 'cursos', 'semestres', 'secciones'));
     }
+     public function edit($id = null)
+    {
+        $cursoAprobado = $this->CursosAprobados->get($id);
+        if ($this->request->is(['post', 'put', 'patch'])) {
+            $cursoAprobado = $this->CursosAprobados->patchEntity($cursoAprobado, $this->request->getData());
+            if ($this->CursosAprobados->save($cursoAprobado)) {
+                $this->Flash->success('Nota curso actualizado.');
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error('No se pudo actualizar.');
+        }
+                $alumnos = $this->CursosAprobados->Alumnos->find('list', [
+            'keyField' => 'id_alumno',
+            'valueField' => function ($row) {
+                return $row['nombres'] . ' ' . $row['apellidos'];
+            }
+        ])->toArray();
+        $cursos = $this->CursosAprobados->Cursos->find('list', ['keyField' => 'id_curso', 'valueField' => 'nombre'])->toArray();
+        $semestres = $this->CursosAprobados->Semestres->find('list', ['keyField' => 'id_semestre', 'valueField' => 'nombre'])->toArray();
+        $secciones = $this->CursosAprobados->Secciones->find('list', ['keyField' => 'id_seccion', 'valueField' => 'nombre'])->toArray();
+        $this->set(compact('cursoAprobado', 'alumnos', 'cursos', 'semestres', 'secciones'));
+    }
 
     public function delete($id = null)
     {

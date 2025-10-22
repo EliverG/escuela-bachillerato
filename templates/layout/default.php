@@ -20,52 +20,80 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.8/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
 
     <style>
         body {
             min-height: 100vh;
             display: flex;
             flex-direction: row;
-            background-color: #f8f9fa;
+            background-color: #FFF5F5;
+            /* Fondo suave rosado pastel */
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: #333;
         }
 
         .sidebar {
             width: 250px;
-            background-color: #343a40;
-            color: #fff;
+            background-color: #8b1e3fff;
+            /* Rojo vino elegante */
+            color: #FCEEF0;
             position: fixed;
             height: 100%;
             overflow-y: auto;
-        }
-
-        .sidebar a {
-            color: #adb5bd;
-            text-decoration: none;
-            display: block;
-            padding: 12px 20px;
-            transition: all 0.2s;
-        }
-
-        .sidebar a:hover,
-        .sidebar a.active {
-            background-color: #495057;
-            color: #fff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
         }
 
         .sidebar .brand {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FFF;
             text-align: center;
             padding: 20px 0;
-            background-color: #212529;
-            border-bottom: 1px solid #495057;
+            background-color: #701A36;
+            /* Tono más oscuro */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar a {
+            color: #FCEEF0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .sidebar a:hover {
+            background-color: #A52A4E;
+            /* Resalta con tono más claro */
+            color: #FFF;
+            border-left-color: #FFE3E3;
+        }
+
+        .sidebar a.active {
+            background-color: #A52A4E;
+            color: #FFF;
+            border-left: 4px solid #FFE3E3;
+            font-weight: 600;
         }
 
         main {
             margin-left: 250px;
             padding: 30px;
             flex-grow: 1;
+            background-color: #FFF5F5;
         }
 
         @media (max-width: 768px) {
@@ -80,6 +108,7 @@
             }
         }
     </style>
+
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -124,10 +153,14 @@
             <i class="fa-solid fa-layer-group me-2"></i>Secciones
         </a>
 
-        <!-- 👇 Y este tiene su propio prefijo -->
         <a class="<?= str_starts_with($path, '/cursos-aprobados') ? 'active' : '' ?>"
             href="<?= $this->Url->build('/cursos-aprobados') ?>">
             <i class="fa-solid fa-file-pen me-2"></i>Notas
+        </a>
+
+        <a class="<?= str_starts_with($path, '/reporteria') ? 'active' : '' ?>"
+            href="<?= $this->Url->build('/reporteria') ?>">
+            <i class="fa-solid fa-file-pdf me-2"></i>Reporteria
         </a>
     </nav>
 
@@ -165,7 +198,7 @@
                     text: message,
                     icon: isError ? 'error' : 'success',
                     confirmButtonText: 'Aceptar'
-                });
+                }).then(()=>flashContainer.remove());
             }
         });
     </script>
@@ -191,6 +224,7 @@
                         if (result.isConfirmed) {
                             form.submit();
                         }
+                        flashContainer.remove();
                     });
                 });
             });

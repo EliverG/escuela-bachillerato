@@ -5,7 +5,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
-class Secciones extends Entity
+class Seccion extends Entity
 {
     protected array $_accessible = [
         '*' => true,

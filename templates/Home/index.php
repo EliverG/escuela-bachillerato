@@ -110,12 +110,12 @@ $this->assign('title', 'Inicio');
       <div class="card shadow-sm h-100">
         <div class="card-body d-flex flex-column">
           <div class="d-flex align-items-center mb-3">
-            <i class="fa-solid fa-briefcase fa-2x text-secondary me-3"></i>
-            <h5 class="card-title mb-0">Reportes</h5>
+            <i class="fa-solid fa-file-pdf fa-2x text-secondary me-3"></i>
+            <h5 class="card-title mb-0">Reporteria</h5>
           </div>
           <p class="card-text text-muted flex-grow-1">Generación de reportes por especificaciones.</p>
-          <a class="btn btn-dark mt-auto" href="<?= $this->Url->build('/carreras') ?>">
-            Ir a Reportes
+          <a class="btn btn-dark mt-auto" href="<?= $this->Url->build('/reporteria') ?>">
+            Ir a Reporteria
           </a>
         </div>
       </div>

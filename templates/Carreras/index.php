@@ -24,7 +24,7 @@
                         <td><?= $c->id_carrera ?></td>
                         <td><?= h($c->nombre) ?></td>
                         <td><?= h($c->descripcion) ?></td>
-                        <td class="text-center">
+                        <td class="col-2 text-center">
                             <?= $this->Html->link(
                                 '<i class="fa-solid fa-pencil"></i>',
                                 ['action' => 'edit', $c->id_carrera],
@@ -41,13 +41,13 @@
                                 'class' => 'd-inline form-delete',
                                 'onsubmit' => 'return false;' // evita submit automático
                             ]) ?>
+
                             <button type="submit" class="btn btn-danger btn-sm btn-delete" data-bs-toggle="tooltip"
                                 title="Eliminar">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
+
                             <?= $this->Form->end() ?>
-
-
 
                             <?= $this->Html->link(
                                 '<i class="fa-solid fa-eye"></i>',
@@ -59,6 +59,7 @@
                                     'escape' => false
                                 ]
                             ) ?>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -25,7 +25,7 @@
                             <td class="text-center"><?= $s->id_seccion ?></td>
                             <td><?= h($s->nombre) ?></td>
                             <td><?= h($s->descripcion ?: '-') ?></td>
-                            <td class="text-center">
+                            <td class="col-2 text-center">
                                 <?= $this->Html->link(
                                     '<i class="fa-solid fa-pencil"></i>',
                                     ['action' => 'edit', $s->id_seccion],
